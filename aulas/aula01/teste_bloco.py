@@ -1,0 +1,1 @@
+print("testando o bloco de notas")
