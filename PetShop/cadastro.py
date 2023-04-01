@@ -31,16 +31,35 @@ def validaEmail(email):
         return True
     else:
         return False
+    
+#def validaTelefone(telefone):
+#   pattern_telefone = r'^[0-9]{11}'
+#  
+#   if search(pattern_telefone, telefone):
+#       return True
+#   else:
+#       return False
 
+# Validação de senha -----------------------------------------------------------------------------------------------------    
+
+def validaSenha(senha):
+    if senha != txtConfirmarSenha.get():
+        txtConfirmarSenha.configure(border_color=red)
+    else:
+        txtConfirmarSenha.configure(border_color=light_gray)
+
+def on_key_release(e):
+    validaSenha(txtSenha.get())
+        
 # CRUD com MongoDB -----------------------------------------------------------------------------------------------------
 
 # Conexão com o banco de dados
 client = MongoClient('localhost', 27017)
 
 # Seleciona o banco de dados
-db = client['PetShop']
+db = client['Petshop']
 
-# Armazena a coleção
+# Armazena/cria a coleção
 collection = db['Funcionarios']
 
 # Create
@@ -65,13 +84,25 @@ def cadastrar():
         txtTelefone.delete(0, END)
         txtSenha.delete(0, END)
         txtConfirmarSenha.delete(0, END)
-
+        
+        msgValidaEmail = "Cadastrado com sucesso"
+        
+        txtEmail.configure(border_color=light_gray)
+        
         # Focar no Frame e não no último campo
         formFieldset.focus()
 
     else:
-        print("email invalido")
-
+        txtEmail.configure(border_color=red)
+        txtEmail.focus()
+        
+        msgValidaEmail = "E-mail inválido"
+        
+    msg = CTkLabel(formFieldset, text=msgValidaEmail)
+    msg.grid(row=7, column=0, pady=10, sticky=W)
+        
+    
+    
 # Configuração de Tela --------------------------------------------------------------------------------------------------
 
 tela = CTk()
@@ -101,6 +132,10 @@ txtConfirmarSenha = CTkEntry(formFieldset, placeholder_text="Confirmar Senha", w
 btnCadastrar = CTkButton(formFieldset, text="Cadastrar", width=100, command=cadastrar)
 
 # Configurando os Widgets ----------------------------------------------------------------------------------------------
+
+# Associando widget ao evento
+
+txtConfirmarSenha.bind("<KeyRelease>", on_key_release)
 
 # Gerenciadores
 

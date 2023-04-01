@@ -17,6 +17,15 @@ tela.resizable(False, False)
 tela._set_appearance_mode("dark")
 set_default_color_theme("green")
 
+# Abrir outra janela ---------------------------------------------------------------------------------------------------
+
+#def cadastrar_usuario():
+    
+#    tela_cadastro
+    
+    # Fechar tela de Login
+#    tela.destroy()
+
 # Formulário -----------------------------------------------------------------------------------------------------------
 
 formLogin = CTkFrame(tela, corner_radius=20)
@@ -41,7 +50,7 @@ btnEsqueceuSenha.configure(cursor="hand2")
 # Adicionando efeito hover ao botão
 
 def on_enter(e):
-    btnEsqueceuSenha.configure(text_color="light_green")
+    btnEsqueceuSenha.configure(text_color=light_green)
 def on_leave(e):
     btnEsqueceuSenha.configure(text_color="white")
 
